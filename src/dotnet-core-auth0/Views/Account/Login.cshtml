@@ -1,0 +1,23 @@
+﻿@model dotnet_core_auth0.Infrastructure.Authentication.LockContext
+
+@{
+  ViewBag.Title = "Login";
+  Layout = "_Layout";
+}
+
+<script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
+<script type="text/javascript">
+  var lock = new Auth0Lock('@Model.ClientId', '@Model.Domain');
+
+  lock.show({
+    closable: false,
+    callbackURL: '@Model.CallbackUrl',
+
+    authParams: {
+      nonce: '@Model.Nonce',
+      state: '@Model.State',
+      scope: 'openid profile',
+      response_type: 'code'
+    }
+  });
+</script>
